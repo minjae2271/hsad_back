@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify 
+from dotenv import load_dotenv
+import os
 from flask_cors import CORS
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -6,10 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-import pandas as pd
-import os
 import time
-import pandas as pd
 from openai import OpenAI
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts.chat import (
@@ -18,6 +17,11 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
 )
 from langchain.chat_models import ChatOpenAI
+
+load_dotenv()
+API_KEY = os.getenv("OPENAI_API_KEY")
+email = os.getenv("AMAZON_EMAIL")
+password = os.getenv("AMAZON_PASSWORD")
 
 app = Flask(__name__)
 
@@ -223,7 +227,6 @@ def one_review_collect(driver, asin):
 #         return { "summary": "Error occurred"}
 
 def get_review_summary(review_text, product_name, review_type):
-    API_KEY ="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"
     # if review_text == "No Review":
     #     output = {"product_name": product_name, "summary": "No Reviews"}
     #     print(output)
@@ -295,8 +298,6 @@ def search():
 
         driver = engine()
 
-        email = "minjae2271@gmail.com"
-        password = "g!!2933275"
         amazon_login(email, password, driver)
         amazon_search(driver, search_query)
 
