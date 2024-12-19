@@ -33,7 +33,7 @@ def build_actual_response(response):
 
 def engine():
     chrome_options = Options()
-    chrome_options.binary_location = "/usr/bin/google-chrome" 
+    # chrome_options.binary_location = "/usr/bin/google-chrome" 
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument('--no-sandbox')
@@ -44,10 +44,10 @@ def engine():
     return webdriver.Chrome(service=service, options=chrome_options)
 
 def amazon_login(email, password, driver):
-    base_url = "https://www.amazon.de/ap/signin"
+    base_url = "https://www.amazon.com/ap/signin"
     params = {
     "openid.pape.max_auth_age": "900",  # 최대 인증 허용 시간 (초 단위)
-    "openid.return_to": "https://www.amazon.de",  # 인증 성공 후 리다이렉션 URL
+    "openid.return_to": "https://www.amazon.com",  # 인증 성공 후 리다이렉션 URL
     "openid.assoc_handle": "deflex",  # 사이트/서비스의 프로파일 핸들
     "openid.mode": "checkid_setup",  # OpenID 인증 요청 단계
     "openid.ns": "http://specs.openid.net/auth/2.0"  # OpenID 프로토콜 버전
@@ -57,7 +57,6 @@ def amazon_login(email, password, driver):
     try:
         driver.get(url)
         time.sleep(2)
-
 
         email_input = driver.find_element(By.ID, "ap_email")
         email_input.send_keys(email)
