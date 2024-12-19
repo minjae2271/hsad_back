@@ -311,7 +311,7 @@ def search():
         return jsonify(asins)
 
     except Exception as e:
-        return {"message": "Server Error"}
+        return {"message": f"Server Error: {e}"}
 
 @app.route("/summary", methods=["POST"])
 def summary():
