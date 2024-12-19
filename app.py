@@ -179,7 +179,6 @@ def one_review_collect(driver, asin):
         return de_review_list
 
 # def get_review_summary(review_text):
-#     API_KEY ="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"
 #     print("text", review_text)
 #     try:        
 #         chat = ChatOpenAI(openai_api_key=API_KEY)
